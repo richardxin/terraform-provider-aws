@@ -102,10 +102,10 @@ func resourceAwsEMRCluster() *schema.Resource {
 				Computed: true,
 			},
 			"auto_terminate": {
-            	Type:     schema.TypeBool,
-            	Optional: true,
-            	Computed: true,
-            },
+				Type:     schema.TypeBool,
+				Optional: true,
+				Computed: true,
+			},
 			"ec2_attributes": {
 				Type:     schema.TypeList,
 				MaxItems: 1,
@@ -420,9 +420,9 @@ func resourceAwsEMRClusterCreate(d *schema.ResourceData, meta interface{}) error
 		TerminationProtected:        aws.Bool(terminationProtection),
 	}
 	autoTerminate := false
-    if v, ok := d.GetOk("auto_terminate"); ok {
-    	autoTerminate = v.(bool)
-    }
+	if v, ok := d.GetOk("auto_terminate"); ok {
+		autoTerminate = v.(bool)
+	}
 
 	if v, ok := d.GetOk("master_instance_type"); ok {
 		instanceConfig.MasterInstanceType = aws.String(v.(string))
@@ -810,7 +810,7 @@ func resourceAwsEMRClusterUpdate(d *schema.ResourceData, meta interface{}) error
 	if d.HasChange("auto_terminate") {
 		d.SetPartial("auto_terminate")
 		_, errModify := conn.SetAutoTerminate(&emr.SetAutoTerminate{
-			JobFlowIds:           []*string{aws.String(d.Id())},
+			JobFlowIds:    []*string{aws.String(d.Id())},
 			AutoTerminate: aws.Bool(d.Get("auto_terminate").(bool)),
 		})
 		if errModify != nil {
