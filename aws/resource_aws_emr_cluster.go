@@ -809,7 +809,7 @@ func resourceAwsEMRClusterUpdate(d *schema.ResourceData, meta interface{}) error
 
 	if d.HasChange("auto_terminate") {
 		d.SetPartial("auto_terminate")
-		_, errModify := conn.SetAutoTerminate(&emr.SetAutoTerminate{
+		_, errModify := conn.SetAutoTerminate(&emr.SetAutoTerminateInput{
 			JobFlowIds:    []*string{aws.String(d.Id())},
 			AutoTerminate: aws.Bool(d.Get("auto_terminate").(bool)),
 		})
